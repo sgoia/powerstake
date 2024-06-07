@@ -1,6 +1,5 @@
-# ![alt tag](https://uploads-ssl.webflow.com/5fc917a7914bf7aa30cae033/5ff4e84c73f45881c8b9cd85_Logo-purple-dark-background-p-500.png)
+# Power Stake
 
-![Build Status](https://github.com/sgoia/powerstake/actions/workflows/build.yml/badge.svg)
 ![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
 [![GitHub issues](https://img.shields.io/github/issues/sgoia/powerstake.svg)](https://GitHub.com/sgoia/powerstake/issues/)
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
