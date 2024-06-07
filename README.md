@@ -7,7 +7,10 @@
 
 ## Introductions
 
-Power Stake tokens for immediate stake reward profit unlock, e.g. stake 100 ETH for APR 5% per year, when you stake you get 105 psETH that represents the initial deposit and total profit for immediate use, another form of liquid staking but more profitable. When unlock is allowed, regarding either amount of staking profits before the end of the term, PowerStake smart contract burns 105 psETH from user wallet (after user approves PowerStake to do so) and gets user his profit and initial stake in ETH.
+Power Stake, unlock stake deposit and reward right away, profitable liquid staking protocol helping users maximize staking investments.
+E.g.
+- Stake 100 ETH for APR 5% per year, get 105 psETH minted tokens that represent the initial deposit and total profit for immediate use.
+- When unlock is allowed (either at the end of the term or before), PowerStake smart contract burns 105 psETH from user wallet (after user approves PowerStake to do so) and send user initial deposit and stake profit in ETH, 100 ETH plus maximum 5 ETH for the APR profit depending on the time of the unlock.
 
 ## Local Development
 
