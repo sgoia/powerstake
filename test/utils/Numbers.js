@@ -64,7 +64,5 @@ function fromExponential(x) {
 	return ret;
 };
 
-};
-
 //export default Numbers;
 module.exports = { toSmartContractDecimals, timeToSmartContractTime, fromSmartContractTimeToMinutes, noExponents, fromExponential };

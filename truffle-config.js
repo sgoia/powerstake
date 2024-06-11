@@ -96,10 +96,16 @@ module.exports = {
     //
     development: {
 			host: "127.0.0.1",     // Localhost (default: none)
-			port: 4444,						 // Rootstock dev port
-			//port: 8545,            // ganache local testing
+			port: 8545,            // ganache local testing
 			network_id: "*",       // Any network (default: none)
     },
+		
+		rskdev: {
+			host: "127.0.0.1",     // Localhost (default: none)
+			port: 4444,						 // Rootstock dev port
+			network_id: "*",       // Any network (default: none)
+		},
+		
     //
     // An additional network, but with some advanced options…
     // advanced: {

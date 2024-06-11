@@ -1,4 +1,8 @@
+/// THIS SCRIPT WAS USED WHEN SOMETHING WENT WRONG THE 1ST TIME WE RUN MIGRATION SCRIPT,
+/// WE USE THIS ONE WITH KNOWING ADDRESSES TO SETUP NEEDED FUNCTIONS FOR POWER STAKE CONTRACT
+///
 /* global web3 */
+
 const BigNumber = require('bignumber.js');
 const moment = require('moment');
 const ERC20Mock = artifacts.require('./ERC20Mock.sol');
@@ -18,30 +22,24 @@ const individualMinimumAmount = toSmartContractDecimals(10, 18);
 const APR = 5;
 const lockedUntilFinalization = false;
 
+
+
 // RSK Testnet deployed smart contracts addresses
 let erc20Address = '0xD9DCEF6341dd179c520CCF8217981Bb6a3a689b8';
 let psTokenAddress = '0x9E9a1ACe534f257502c78C37F032B06a8c3617c4';
 let powerStakingAddress = '0xe50F765f88E7Cf92cA2f33551A00f017db67eF1C';
 
 module.exports = async (deployer, network, accounts) => {
-  await deployer.deploy(ERC20Mock, name, symbol, erc20Amount);
-  const erc20 = await ERC20Mock.deployed();
-	await deployer.deploy(PSToken, psTag+name, psTag+symbol);
-  const psToken = await PSToken.deployed();
+	const erc20 = await ERC20Mock.at(erc20Address);
+	const psToken = await PSToken.at(psTokenAddress);
 	console.log('erc20.address: ', erc20.address);
 	console.log('psToken.address: ', psToken.address);
 	
-	await deployer.deploy(PowerStaking, erc20.address, nftAddressZERO, psToken.address);
-	const powerStaking = await PowerStaking.deployed();
+	const powerStaking = await PowerStaking.at(powerStakingAddress);
 	console.log('powerStaking.address: ', powerStaking.address);
 	
-  //if (network !== 'development') {
-  //  return;
-  //}
-	
 	const allowance = erc20Amount;
-  //await erc20.mint(accounts[0], allowance);
-	console.log('---erc20.approve.powerStaking...');
+  console.log('---erc20.approve.powerStaking...');
   await erc20.approve(powerStaking.address, allowance, { from: accounts[0] });
 	console.log('---psToken.approve.powerStaking...');
 	await psToken.approve(powerStaking.address, allowance, { from: accounts[0] });
@@ -72,5 +70,5 @@ module.exports = async (deployer, network, accounts) => {
 		{ from: accounts[0] },
 	);
 	
-	console.log('---powerStaking: migration success!');
+	console.log('---powerStaking: setup success!');
 };
