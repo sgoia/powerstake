@@ -14,9 +14,9 @@ E.g.
 
 ## Deployed smart contracts on Rootstock Testnet
 
-ERC20 mock for Wrapped ETH token address: 0xD9DCEF6341dd179c520CCF8217981Bb6a3a689b8
-PowerStake Token for WETH tokens address: 0x9E9a1ACe534f257502c78C37F032B06a8c3617c4
-Power Staking smart contract address: 0xe50F765f88E7Cf92cA2f33551A00f017db67eF1C
+- ERC20 mock for Wrapped ETH token address: 0xD9DCEF6341dd179c520CCF8217981Bb6a3a689b8
+- PowerStake Token for WETH tokens address: 0x9E9a1ACe534f257502c78C37F032B06a8c3617c4
+- Power Staking smart contract address: 0xe50F765f88E7Cf92cA2f33551A00f017db67eF1C
 
 You can mint some WETH tokens on Rootstock testnet to stake it into Power Staking smart contract and get psWETH.
 
