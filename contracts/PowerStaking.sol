@@ -24,8 +24,8 @@ contract PowerStaking is Pausable, Ownable {
     ERC20 public erc20;
 
     address public erc721;
-		
-		PSToken public psToken;
+
+    PSToken public psToken;
 
     struct SubscriptionAPR {
         uint256 _id;
@@ -82,10 +82,10 @@ contract PowerStaking is Pausable, Ownable {
     
 
     function createProduct(
-			uint256 _startDate, uint256 _endDate, 
-			uint256 _totalMaxAmount, uint256 _individualMinimumAmount, uint256 _individualMaximumAmount, 
-			uint256 _APR, bool _lockedUntilFinalization
-		) external whenNotPaused onlyOwner returns (uint256) {
+		uint256 _startDate, uint256 _endDate, 
+		uint256 _totalMaxAmount, uint256 _individualMinimumAmount, uint256 _individualMaximumAmount, 
+		uint256 _APR, bool _lockedUntilFinalization
+	) external whenNotPaused onlyOwner returns (uint256) {
 
         /* Confirmations */
         require(block.timestamp < _endDate, "Err0");
@@ -109,7 +109,7 @@ contract PowerStaking is Pausable, Ownable {
         /* Add Product to System */
         productIds.push(product_id);
         products[product_id] = productAPR;
-				return product_id;
+        return product_id;
     }
 		
     function getAPRAmount(uint256 _APR, uint256 _startDate, uint256 _endDate, uint256 _amount) public pure returns(uint256) {
@@ -124,7 +124,7 @@ contract PowerStaking is Pausable, Ownable {
         return mySubscriptions[_address];
     }
 		
-		function subscribeProduct(uint256 _product_id, uint256 _amount) external whenNotPaused returns (bool) {
+	function subscribeProduct(uint256 _product_id, uint256 _amount) external whenNotPaused returns (bool) {
 
         uint256 time = block.timestamp;
         /* Confirm Amount is positive */
@@ -179,10 +179,10 @@ contract PowerStaking is Pausable, Ownable {
         subscriptions[_product_id][subscription_id] = subscriptionAPR;
         products[_product_id].currentAmount = products[_product_id].currentAmount + _amount;
         products[_product_id].subscribers.push(msg.sender);
-				
-				// send ps tokens for locked and future profit amounts to user/staker
-				psToken.mint(msg.sender, _amount.add(futureAPRAmount));
-				return true;
+		
+		// send ps tokens for locked and future profit amounts to user/staker
+		psToken.mint(msg.sender, _amount.add(futureAPRAmount));
+		return true;
     }
 		
     function withdrawSubscription(uint256 _product_id, uint256 _subscription_id) external whenNotPaused {
@@ -214,7 +214,7 @@ contract PowerStaking is Pausable, Ownable {
             require(products[_product_id].lockedUntilFinalization == false, "Product has to close to be withdrawn");
         }
 				
-				uint256 APRedAmount = getAPRAmount(subscription.APR, subscription.startDate, finishDate, subscription.amount);
+		uint256 APRedAmount = getAPRAmount(subscription.APR, subscription.startDate, finishDate, subscription.amount);
         require(APRedAmount > 0, "APR amount has to be bigger than 0");
         uint256 totalAmount = subscription.amount.add(APRedAmount);
         uint256 totalAmountWithFullAPR = subscription.amount.add(getAPRAmount(subscription.APR, subscription.startDate, products[_product_id].endDate, subscription.amount));
@@ -230,14 +230,14 @@ contract PowerStaking is Pausable, Ownable {
 
         /* Sub to LockedTokens */
         lockedTokens = lockedTokens.sub(totalAmountWithFullAPR);
-				
-				// burn total ps tokens with APR staking profits
-				//psToken.burnFrom(subscription.subscriberAddress, totalAmount);
-				psToken.burnFrom(subscription.subscriberAddress, totalAmountWithFullAPR);
+		
+		// burn total ps tokens with APR staking profits
+		psToken.burnFrom(subscription.subscriberAddress, totalAmountWithFullAPR);
     }
 
-    function getSubscription(uint256 _subscription_id, uint256 _product_id) external view returns (uint256, uint256, uint256, uint256, uint256, address, uint256, bool, uint256){
-
+    function getSubscription(uint256 _subscription_id, uint256 _product_id) external view 
+        returns (uint256, uint256, uint256, uint256, uint256, address, uint256, bool, uint256) {
+        
         SubscriptionAPR memory subscription = subscriptions[_product_id][_subscription_id];
 
         return (subscription._id, subscription.productId, subscription.startDate, subscription.endDate,
@@ -261,6 +261,6 @@ contract PowerStaking is Pausable, Ownable {
     function changeTokenAddress(address _tokenAddress, address _psTokenAddress) external onlyOwner whenPaused  {
         /* If Needed to Update the Token Address (ex : token swap) */
         erc20 = ERC20(_tokenAddress);
-				psToken = PSToken(_psTokenAddress);
+		psToken = PSToken(_psTokenAddress);
     }
 }
