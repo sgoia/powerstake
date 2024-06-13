@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./utils/Ownable.sol";
 import "./PSToken.sol";
 
-
+// based on https://github.com/bepronetwork/bepro-js/blob/master/contracts/StakingContract.sol
 
 contract PowerStaking is Pausable, Ownable {
     using SafeMath for uint256;
@@ -214,10 +214,7 @@ contract PowerStaking is Pausable, Ownable {
             require(products[_product_id].lockedUntilFinalization == false, "Product has to close to be withdrawn");
         }
 				
-				// TODO: consider partial withdrawals and burn the correct PS tokens to avoid over supply
-				// NOTE: burn ps tokens as full APR tokens
-				
-        uint256 APRedAmount = getAPRAmount(subscription.APR, subscription.startDate, finishDate, subscription.amount);
+				uint256 APRedAmount = getAPRAmount(subscription.APR, subscription.startDate, finishDate, subscription.amount);
         require(APRedAmount > 0, "APR amount has to be bigger than 0");
         uint256 totalAmount = subscription.amount.add(APRedAmount);
         uint256 totalAmountWithFullAPR = subscription.amount.add(getAPRAmount(subscription.APR, subscription.startDate, products[_product_id].endDate, subscription.amount));
