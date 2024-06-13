@@ -60,7 +60,7 @@ contract PowerStaking is Pausable, Ownable {
 
     constructor(address _tokenAddress, address _nftAddress, address _psTokenAddress) public {
         erc20 = ERC20(_tokenAddress);
-				psToken = PSToken(_psTokenAddress);
+        psToken = PSToken(_psTokenAddress);
         erc721 = _nftAddress;
     }
 
